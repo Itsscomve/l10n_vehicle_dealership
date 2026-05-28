@@ -1,0 +1,16 @@
+<odoo>
+  <record id="fleet_vehicle_form_inherit_trade" model="ir.ui.view">
+    <field name="name">fleet.vehicle.form.trade</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet_vehicle_trade_consignment.fleet_vehicle_form_inherit_trade" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='lot_id']" position="after">
+        <field name="customer_id" />
+        <field name="lot_body_serial" invisible="not lot_id" />
+        <field name="lot_engine_serial" invisible="not lot_id" />
+        <field name="lot_vehicle_plate" invisible="not lot_id" />
+      </xpath>
+    </field>
+  </record>
+
+</odoo>
