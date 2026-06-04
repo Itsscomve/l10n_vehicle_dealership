@@ -5,9 +5,9 @@
     'summary': 'Extensión local del concesionario de vehículos',
     'author': 'IT SOLUTIONS & SERVICES, C.A.',
     'license': 'LGPL-3',
-    'depends': ['vehicle_trade'],
+    'depends': ['vehicle_trade', 'stock'],
     'data': [
-       # 'views/fleet_vehicle_views.xml',
+        'views/fleet_vehicle_views.xml',
         'views/stock_lot_views.xml',
     ],
     'application': False,
