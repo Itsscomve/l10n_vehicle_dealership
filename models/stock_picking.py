@@ -18,19 +18,19 @@ class StockPicking(models.Model):
                 if not vehicle:
                     continue
 
+                values = None
                 if picking.picking_type_code == "incoming":
                     values = {"lot_id": line.lot_id.id}
-                    if line.lot_id.name and not vehicle.vin_number:
-                        values["vin_number"] = line.lot_id.name
-                    if line.lot_id.vehicle_plate and not vehicle.license_plate:
-                        values["license_plate"] = line.lot_id.vehicle_plate
-                    vehicle.write(values)
-
-                if picking.picking_type_code == "outgoing":
+                elif picking.picking_type_code == "outgoing":
                     values = {"customer_id": picking.partner_id.id or False}
-                    if line.lot_id.name and not vehicle.vin_number:
-                        values["vin_number"] = line.lot_id.name
-                    if line.lot_id.vehicle_plate and not vehicle.license_plate:
-                        values["license_plate"] = line.lot_id.vehicle_plate
-                    vehicle.write(values)
+
+                if values is None:
+                    continue
+
+                if line.lot_id.name and not vehicle.vin_number:
+                    values["vin_number"] = line.lot_id.name
+                if line.lot_id.vehicle_plate and not vehicle.license_plate:
+                    values["license_plate"] = line.lot_id.vehicle_plate
+
+                vehicle.write(values)
         return res
